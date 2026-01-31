@@ -1,12 +1,18 @@
-// Package calculadora proporciona herramientas sencillas para realizar operaciones
-// aritméticas básicas como parte de un ejemplo de aprendizaje de módulos.
+// Package calculadora proporciona herramientas aritméticas genéricas.
 package calculadora
 
-// Add devuelve la suma de dos números enteros.
+import "golang.org/x/exp/constraints"
+
+// Number es una interfaz que agrupa tipos numéricos enteros y de punto flotante.
+type Number interface {
+	constraints.Integer | constraints.Float
+}
+
+// Add suma dos números de cualquier tipo que implemente la interfaz Number.
 //
-// Es una implementación básica de la operación aritmética de adición.
-// Para más información sobre los fundamentos de la suma, consulta:
+// Esta función es genérica y funciona tanto con int, int64, float64, etc.
+// Para más información sobre la adición:
 // https://www.mathsisfun.com/numbers/addition.html
-func Add(a, b int) int {
+func Add[T Number](a, b T) T {
 	return a + b
 }
